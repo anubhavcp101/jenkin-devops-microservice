@@ -4,8 +4,7 @@
 pipeline {
     agent {
         docker {
-            image 'maven:3.9'
-            args '-v $HOME/.m2:/root/.m2'
+            image 'node:19-alpine3.16'
         }
     }
     stages {
