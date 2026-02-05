@@ -1,0 +1,2 @@
+Name,AMI,InstanceType,PrivateIP,SubnetId,VolumeType,AZ,rootVolume,EbsVolume
+win02,ami-xxx,t3.micro,10.0.x.x,subnet-xxx,gp3,<az-region>,8,"30;/dev/sdf,20;/dev/sdg"
