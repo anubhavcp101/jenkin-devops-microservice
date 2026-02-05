@@ -16,7 +16,7 @@ variable "key_id" {
 }
 
 variable "ec2_iam_profile" {
-  default = "ebs-kms-role"
+  default = "xxx"
 }
 
 variable "ec2_sg" {
@@ -67,7 +67,7 @@ resource "aws_instance" "ec2" {
   availability_zone    = each.value.az
   iam_instance_profile = var.ec2_iam_profile
   #associate_public_ip_address = false
-  key_name = "win-00"
+  key_name = "xxx"
 
   root_block_device {
     delete_on_termination = true
