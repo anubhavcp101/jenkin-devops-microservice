@@ -44,6 +44,8 @@ locals {
         instance = ec2.Name
         size = element(split(";",ebs),0)
         device = element(split(";",ebs),1)
+        volume   = ec2.VolumeType
+        vol_az   = ec2.AZ
       }
     ]
   ])
@@ -94,15 +96,15 @@ resource "aws_instance" "ec2" {
 
 resource "aws_ebs_volume" "vol" {
   for_each = { for vol in local.vols : "${vol.instance}-${vol.device}" => vol }
-  availability_zone = var.instance_az
+  availability_zone = each.value.vol_az
   size              = each.value.size
-  type = var.vol_type
+  type = each.value.volume
   
   encrypted = true
   kms_key_id = var.key_id
 
   tags = merge(var.common_tags, {
-    Name = "ebsVol-${var.name}"
+    Name = "ebsVol-${each.value.instance}"
   })
 }
 
@@ -112,3 +114,4 @@ resource "aws_volume_attachment" "vol_att" {
   volume_id   = aws_ebs_volume.vol["${each.key}"].id
   instance_id = aws_instance.ec2["${each.value.instance}"].id
 }
+
