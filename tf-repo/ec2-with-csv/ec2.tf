@@ -16,7 +16,7 @@ variable "key_id" {
 }
 
 variable "ec2_iam_profile" {
-  default = "xxx"
+  default = "iam-xxx"
 }
 
 variable "ec2_sg" {
@@ -69,7 +69,7 @@ resource "aws_instance" "ec2" {
   availability_zone    = each.value.az
   iam_instance_profile = var.ec2_iam_profile
   #associate_public_ip_address = false
-  key_name = "xxx"
+  key_name = "k-xxx"
 
   root_block_device {
     delete_on_termination = true
@@ -114,4 +114,5 @@ resource "aws_volume_attachment" "vol_att" {
   volume_id   = aws_ebs_volume.vol["${each.key}"].id
   instance_id = aws_instance.ec2["${each.value.instance}"].id
 }
+
 
