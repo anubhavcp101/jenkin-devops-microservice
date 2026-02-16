@@ -48,7 +48,7 @@ locals {
         vol_az   = ec2.AZ
       }
     ]
-  ])
+  if ec2.EbsVolume != ""])
 
 }
 
@@ -114,5 +114,6 @@ resource "aws_volume_attachment" "vol_att" {
   volume_id   = aws_ebs_volume.vol["${each.key}"].id
   instance_id = aws_instance.ec2["${each.value.instance}"].id
 }
+
 
 
